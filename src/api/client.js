@@ -3,7 +3,8 @@
  * Configured with relative paths so Vite development proxy & production bundles work seamlessly.
  */
 
-const API_BASE = '/api/v1';
+const RAW_API_URL = (import.meta.env.VITE_API_URL || '').trim();
+const API_BASE = RAW_API_URL ? `${RAW_API_URL.replace(/\/$/, '')}/api/v1` : '/api/v1';
 
 export async function getSystemHealth() {
   const res = await fetch(`${API_BASE}/health`);
